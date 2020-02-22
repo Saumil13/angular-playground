@@ -1,5 +1,6 @@
-<button class="btn btn-primary" [disabled]="!allowNewerver">Add server</button>
+<button class="btn btn-primary" [disabled]="!allowNewerver" (click)="onServerCreated()">Add server</button>
 <p [innerText]="allowNewerver"></p>
 <hr>
+<p>{{serverCreationStatus}}</p>
 <app-server></app-server>
 <app-server></app-server>
