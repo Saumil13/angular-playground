@@ -12,7 +12,6 @@ export class RecipeListComponent implements OnInit {
 
   recipes: Recipe[] = [
     new Recipe('Sev puri', 'This is a sev puri', 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Sev_puri_1.jpg'),
-    // tslint:disable-next-line: max-line-length
     new Recipe('Pani puri', 'This is a pani puri', 'https://shorturl.at/cfCRY')
   ];
 
