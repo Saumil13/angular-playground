@@ -12,7 +12,8 @@ export class RecipeListComponent implements OnInit {
 
   recipes: Recipe[] = [
     new Recipe('Sev puri', 'This is a sev puri', 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Sev_puri_1.jpg'),
-    new Recipe('Pani puri', 'This is a pani puri', 'https://shorturl.at/cfCRY')
+    // tslint:disable-next-line: max-line-length
+    new Recipe('Pani puri', 'This is a pani puri', 'https://www.archanaskitchen.com/images/archanaskitchen/1-Author/sneha-archanaskitchen.com/Aam_Panna_Pani_Puri_Recipe_.jpg')
   ];
 
   constructor() { }
