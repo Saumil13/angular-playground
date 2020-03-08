@@ -10,7 +10,7 @@ export class ShoppingListService {
         new Ingredient('Puri', 10)
     ];
 
-    onAddIngredient(ingredient: Ingredient) {
+    addIngredient(ingredient: Ingredient) {
         this.ingredients.push(ingredient);
         this.ingredientChange.emit(this.ingredients.slice());
     }
