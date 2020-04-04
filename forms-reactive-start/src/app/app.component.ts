@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
   genders = ['male', 'female'];
   signUpForm: FormGroup;
   forbiddenUserName = ['Chris', 'Anna'];
