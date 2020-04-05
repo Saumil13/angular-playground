@@ -18,6 +18,7 @@ export class RecipeService {
       new Ingredient('Puri', 10),
       new Ingredient('Potatoes', 5)
     ]),
+
     // tslint:disable-next-line: max-line-length
     new Recipe('Pani puri', 'This is a pani puri', 'https://www.archanaskitchen.com/images/archanaskitchen/1-Author/sneha-archanaskitchen.com/Aam_Panna_Pani_Puri_Recipe_.jpg',
       [
@@ -48,6 +49,11 @@ export class RecipeService {
 
   updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
+    this.recipeChanged.next(this.recipes.slice());
   }
 
 
