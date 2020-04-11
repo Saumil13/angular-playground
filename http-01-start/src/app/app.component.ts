@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+
 import { Post } from './post.model';
 import { PostsService } from './posts.service';
-
 
 @Component({
   selector: 'app-root',
@@ -11,14 +12,18 @@ import { PostsService } from './posts.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   loadedPosts: Post[] = [];
   isFetching = false;
   error = null;
+  private errorSub: Subscription;
 
   constructor(private http: HttpClient, private postsService: PostsService) { }
 
   ngOnInit() {
+    this.errorSub = this.postsService.error.subscribe(errorMessage => {
+      this.error = errorMessage;
+    });
     this.onFetchData();
   }
 
@@ -38,12 +43,21 @@ export class AppComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.errorSub.unsubscribe();
+  }
+
+  onHandleError() {
+    this.error = null;
+  }
+
   private onFetchData() {
     this.isFetching = true;
     this.postsService.fetchPosts().subscribe(data => {
       this.loadedPosts = data;
       this.isFetching = false;
     }, error => {
+      this.isFetching = false;
       this.error = error.message;
     });
   }
