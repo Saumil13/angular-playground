@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Post } from './post.model';
 import { PostsService } from './posts.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,15 +14,12 @@ import { PostsService } from './posts.service';
 export class AppComponent implements OnInit {
   loadedPosts: Post[] = [];
   isFetching = false;
+  error = null;
 
   constructor(private http: HttpClient, private postsService: PostsService) { }
 
   ngOnInit() {
-    this.isFetching = true;
-    this.postsService.fetchPosts().subscribe(data => {
-      this.loadedPosts = data;
-      this.isFetching = false;
-    });
+    this.onFetchData();
   }
 
   onCreatePost(postData: Post) {
@@ -35,7 +33,9 @@ export class AppComponent implements OnInit {
   }
 
   onClearPosts() {
-    // Send Http request
+    this.postsService.deletePosts().subscribe(() => {
+      this.loadedPosts = [];
+    });
   }
 
   private onFetchData() {
@@ -43,6 +43,8 @@ export class AppComponent implements OnInit {
     this.postsService.fetchPosts().subscribe(data => {
       this.loadedPosts = data;
       this.isFetching = false;
+    }, error => {
+      this.error = error.message;
     });
   }
 }
