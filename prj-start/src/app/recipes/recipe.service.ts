@@ -25,25 +25,30 @@ export class RecipeService {
         new Ingredient('Buns', 2),
         new Ingredient('Meat', 1)
       ]),
-      new Recipe(
-        'Pani Puri',
-        'A super-tasty Pami Puri - just awesome!',
-        'https://www.archanaskitchen.com/images/archanaskitchen/1-Author/sneha-archanaskitchen.com/Aam_Panna_Pani_Puri_Recipe_.jpg',
-        [
-          new Ingredient('Puri', 10),
-          new Ingredient('Sev', 20)
-        ]),
-        new Recipe(
-          'Pav Bhaji',
-          'A super-tasty Pav Bhaji - just awesome!',
-          'https://www.corriecooks.com/wp-content/uploads/2018/09/Instant-Pot-PavBhaji.jpg',
-          [
-            new Ingredient('Pav', 10),
-            new Ingredient('Bhaji', 20)
-          ]),
+    new Recipe(
+      'Pani Puri',
+      'A super-tasty Pami Puri - just awesome!',
+      'https://www.archanaskitchen.com/images/archanaskitchen/1-Author/sneha-archanaskitchen.com/Aam_Panna_Pani_Puri_Recipe_.jpg',
+      [
+        new Ingredient('Puri', 10),
+        new Ingredient('Sev', 20)
+      ]),
+    new Recipe(
+      'Pav Bhaji',
+      'A super-tasty Pav Bhaji - just awesome!',
+      'https://www.corriecooks.com/wp-content/uploads/2018/09/Instant-Pot-PavBhaji.jpg',
+      [
+        new Ingredient('Pav', 10),
+        new Ingredient('Bhaji', 20)
+      ]),
   ];
 
-  constructor(private slService: ShoppingListService) {}
+  constructor(private slService: ShoppingListService) { }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();
