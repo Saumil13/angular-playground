@@ -29,7 +29,9 @@ export class AuthService {
       .post<AuthResponseData>(
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + this.apiKey,
         {
+          // tslint:disable-next-line: object-literal-shorthand
           email: email,
+          // tslint:disable-next-line: object-literal-shorthand
           password: password,
           returnSecureToken: true
         }
