@@ -16,14 +16,16 @@ export class DataStorageService {
 
   storeRecipes() {
     const recipes = this.recipeService.getRecipes();
-    this.http
-      .put(
-        'https://ng-recipebook-f3814.firebaseio.com/recipes.json',
-        recipes
-      )
-      .subscribe(response => {
-        console.log(response);
-      });
+    if (recipes.length > 0) {
+      this.http
+        .put(
+          'https://ng-recipebook-f3814.firebaseio.com/recipes.json',
+          recipes
+        )
+        .subscribe(response => {
+          console.log(response);
+        });
+    }
   }
 
   fetchRecipes() {
