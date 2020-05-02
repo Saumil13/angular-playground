@@ -37,7 +37,7 @@ export class RecipeEffects {
     withLatestFrom(this.store.select('recipes')),
     switchMap(([actionData, recipesState]) => {
       return this.http.put(
-        'https://ng-course-recipe-book-65f10.firebaseio.com/recipes.json',
+        'https://ng-recipebook-f3814.firebaseio.com/recipes.json',
         recipesState.recipes
       );
     })
