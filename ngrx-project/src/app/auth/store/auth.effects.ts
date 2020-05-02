@@ -33,7 +33,8 @@ const handleAuthentication = (
     email: email,
     userId: userId,
     token: token,
-    expirationDate: expirationDate
+    expirationDate: expirationDate,
+    redirect: true
   });
 };
 
@@ -65,7 +66,7 @@ export class AuthEffects {
       return this.http
         .post<AuthResponseData>(
           'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=' +
-            environment.firebaseAPIKey,
+          environment.firebaseAPIKey,
           {
             email: signupAction.payload.email,
             password: signupAction.payload.password,
@@ -98,7 +99,7 @@ export class AuthEffects {
       return this.http
         .post<AuthResponseData>(
           'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=' +
-            environment.firebaseAPIKey,
+          environment.firebaseAPIKey,
           {
             email: authData.payload.email,
             password: authData.payload.password,
@@ -127,8 +128,10 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   authRedirect = this.actions$.pipe(
     ofType(AuthActions.AUTHENTICATE_SUCCESS),
-    tap(() => {
-      this.router.navigate(['/']);
+    tap((authSuccess: AuthActions.AuthenticateSuccess) => {
+      if (authSuccess.payload.redirect) {
+        this.router.navigate(['/']);
+      }
     })
   );
 
@@ -163,7 +166,8 @@ export class AuthEffects {
           email: loadedUser.email,
           userId: loadedUser.id,
           token: loadedUser.token,
-          expirationDate: new Date(userData._tokenExpirationDate)
+          expirationDate: new Date(userData._tokenExpirationDate),
+          redirect: false
         });
 
         // const expirationDuration =
@@ -190,5 +194,5 @@ export class AuthEffects {
     private http: HttpClient,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
 }
