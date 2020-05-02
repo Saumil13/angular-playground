@@ -66,7 +66,7 @@ export class AuthEffects {
       return this.http
         .post<AuthResponseData>(
           'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=' +
-          environment.firebaseAPIKey,
+            environment.firebaseAPIKey,
           {
             email: signupAction.payload.email,
             password: signupAction.payload.password,
@@ -99,7 +99,7 @@ export class AuthEffects {
       return this.http
         .post<AuthResponseData>(
           'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=' +
-          environment.firebaseAPIKey,
+            environment.firebaseAPIKey,
           {
             email: authData.payload.email,
             password: authData.payload.password,
@@ -128,8 +128,8 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   authRedirect = this.actions$.pipe(
     ofType(AuthActions.AUTHENTICATE_SUCCESS),
-    tap((authSuccess: AuthActions.AuthenticateSuccess) => {
-      if (authSuccess.payload.redirect) {
+    tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
+      if (authSuccessAction.payload.redirect) {
         this.router.navigate(['/']);
       }
     })
@@ -194,5 +194,5 @@ export class AuthEffects {
     private http: HttpClient,
     private router: Router,
     private authService: AuthService
-  ) { }
+  ) {}
 }

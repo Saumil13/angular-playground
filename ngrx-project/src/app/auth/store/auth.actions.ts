@@ -19,7 +19,7 @@ export class AuthenticateSuccess implements Action {
       expirationDate: Date;
       redirect: boolean;
     }
-  ) { }
+  ) {}
 }
 
 export class Logout implements Action {
@@ -29,19 +29,19 @@ export class Logout implements Action {
 export class LoginStart implements Action {
   readonly type = LOGIN_START;
 
-  constructor(public payload: { email: string; password: string }) { }
+  constructor(public payload: { email: string; password: string }) {}
 }
 
 export class AuthenticateFail implements Action {
   readonly type = AUTHENTICATE_FAIL;
 
-  constructor(public payload: string) { }
+  constructor(public payload: string) {}
 }
 
 export class SignupStart implements Action {
   readonly type = SIGNUP_START;
 
-  constructor(public payload: { email: string; password: string }) { }
+  constructor(public payload: { email: string; password: string }) {}
 }
 
 export class ClearError implements Action {
