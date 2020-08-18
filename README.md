@@ -7,6 +7,6 @@ You need to run npm install first to install the dependencies of the project. ng
 - Data binding (String interpolation, property binding, event binding, two way binding
 - Component, Directive 
 - Communication between component ( @Input() - property binding (pass data from parent component to child), @Output() - custom event binding (Event emitter) (pass data from child component to parent component))
-- Local reference, View child and two way data binding
+- Local reference, view child, content child (accessing element in dom) and two way data binding
 - View encapsulation 
 - Angular life cycle
